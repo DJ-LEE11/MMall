@@ -173,4 +173,15 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccess(user);
     }
 
+    @Override
+    public ServerResponse<String> checkAdmin(User user){
+        if (user == null){
+            return ServerResponse.createByErrorMsg("用户未登录");
+        }
+        if (user.getRole() == Const.Role.ROLE_ADMIN){
+            return ServerResponse.createBySuccessMsg("该用户是管理者");
+        }
+        return ServerResponse.createByErrorMsg("该用户不是管理者");
+    }
+
 }
